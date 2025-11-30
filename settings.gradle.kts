@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "heliumLabs"
+rootProject.name = "eclipseLabs"
 include(":app")

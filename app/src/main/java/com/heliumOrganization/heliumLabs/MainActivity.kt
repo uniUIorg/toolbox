@@ -1,4 +1,4 @@
-package com.heliumOrganization.heliumLabs
+package com.eclipseOrganization.eclipseLabs
 
 import android.content.Context
 import android.content.Context.TELEPHONY_SERVICE
@@ -58,8 +58,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.heliumOrganization.heliumLabs.ui.theme.HeliumLabsTheme
-import com.heliumOrganization.heliumLabs.ui.theme.Theme
+import com.eclipseOrganization.eclipseLabs.ui.theme.EclipseLabsTheme
+import com.eclipseOrganization.eclipseLabs.ui.theme.Theme
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
@@ -73,8 +73,8 @@ class MainActivity : ComponentActivity() {
             val language = remember { mutableStateOf(sharedPref.getString("language", "en") ?: "en") }
 
             CompositionLocalProvider(LocalContext provides createLocaleContext(language.value)) {
-                HeliumLabsTheme(theme = theme.value) {
-                    HeliumLabsApp(theme, language)
+                EclipseLabsTheme(theme = theme.value) {
+                    EclipseLabsApp(theme, language)
                 }
             }
         }
@@ -92,7 +92,7 @@ fun createLocaleContext(language: String): Context {
 }
 
 @Composable
-fun HeliumLabsApp(theme: MutableState<Theme>, language: MutableState<String>) {
+fun EclipseLabsApp(theme: MutableState<Theme>, language: MutableState<String>) {
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
 
     NavigationSuiteScaffold(
@@ -121,7 +121,7 @@ fun KernelStatus() {
     val kernelVersion = System.getProperty("os.version") ?: "unknown"
 
     val (text, color, textColor) = when {
-        kernelVersion.contains("helium", ignoreCase = true) -> Triple("h*", Color(0xFF42A5F5), Color.White)
+        kernelVersion.contains("eclipse", ignoreCase = true) -> Triple("e*", Color(0xFF42A5F5), Color.White)
         kernelVersion.contains("experience", ignoreCase = true) -> Triple("exp", Color(0xFFFFCA28), Color.Black)
         else -> Triple("unknown", Color.DarkGray, Color.White)
     }
@@ -161,7 +161,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "heliumLabs",
+            text = "eclipseLabs",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.fillMaxWidth(),
@@ -292,7 +292,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, theme: MutableState<Theme>, la
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(text = "heliumLabs", fontWeight = FontWeight.Bold)
+                Text(text = "eclipseLabs", fontWeight = FontWeight.Bold)
                 Text(text = "Version $versionName", fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
@@ -311,7 +311,7 @@ enum class AppDestinations(
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HeliumLabsTheme {
+    EclipseLabsTheme {
         HomeScreen()
     }
 }
@@ -321,7 +321,7 @@ fun HomeScreenPreview() {
 fun SettingsScreenPreview() {
     val theme = remember { mutableStateOf(Theme.SYSTEM) }
     val language = remember { mutableStateOf("en") }
-    HeliumLabsTheme(theme = theme.value) {
+    EclipseLabsTheme(theme = theme.value) {
         SettingsScreen(theme = theme, language = language)
     }
 }

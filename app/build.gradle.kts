@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "com.heliumOrganization.heliumLabs"
+    namespace = "com.eclipseOrganization.eclipseLabs"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.heliumOrganization.heliumLabs"
+        applicationId = "com.eclipseOrganization.eclipseLabs"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

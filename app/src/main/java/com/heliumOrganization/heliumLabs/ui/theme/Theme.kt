@@ -1,4 +1,4 @@
-package com.heliumOrganization.heliumLabs.ui.theme
+package com.eclipseOrganization.eclipseLabs.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -27,7 +27,7 @@ enum class Theme {
 }
 
 @Composable
-fun HeliumLabsTheme(
+fun EclipseLabsTheme(
     theme: Theme = Theme.SYSTEM,
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
