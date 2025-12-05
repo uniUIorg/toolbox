@@ -1,4 +1,4 @@
-package com.eclipseLaboratory.eclipseLabs
+package com.heliumOrganization.heliumLabs
 
 import android.content.Context
 import android.content.Context.TELEPHONY_SERVICE
@@ -58,8 +58,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.eclipseLaboratory.eclipseLabs.ui.theme.EclipseLabsTheme
-import com.eclipseLaboratory.eclipseLabs.ui.theme.Theme
+import com.heliumOrganization.heliumLabs.ui.theme.EclipseLabsTheme
+import com.heliumOrganization.heliumLabs.ui.theme.Theme
 import java.io.File
 import java.util.Locale
 
@@ -116,6 +116,11 @@ fun EclipseLabsApp(theme: MutableState<Theme>, language: MutableState<String>) {
         }
     }
 }
+
+fun isKernelSuInstalled(): Boolean {
+    return listOf("/system/bin/su", "/system/xbin/su", "/sbin/su", "/system/su", "/system/bin/.ext/.su").any { File(it).exists() }
+}
+
 
 @Composable
 fun KernelStatus() {

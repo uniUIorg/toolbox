@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "Nemesis",
+      "versionCode": 3,
+      "versionName": "Release Candidate III (3)",
       "outputFile": "app-release.apk"
     }
   ],
