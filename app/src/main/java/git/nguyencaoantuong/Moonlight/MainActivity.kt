@@ -300,7 +300,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, theme: MutableState<Theme>, la
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(text = "eclipseLabs", fontWeight = FontWeight.Bold)
+                Text(text = "Moonlight", fontWeight = FontWeight.Bold)
                 Text(text = "Version $versionName", fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
