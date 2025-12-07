@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "eclipseLabs"
+rootProject.name = "Moonlight"
 include(":app")
