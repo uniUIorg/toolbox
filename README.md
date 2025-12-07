@@ -1,3 +1,5 @@
+<img width="175" align="right" src="https://git.gay/nguyencaoantuong/stuff/raw/branch/main/moonlight.png">
+
 # Moonlight
 
 Lightweight kernel manager for Android.
@@ -18,4 +20,4 @@ chmod +x gradlew
 ./gradlew assembleRelease 
 ```
 
-- [**Install**](https://git.gay/nguyencaoantuong/Moonlight/releases)
+- [**Install from Releases**](https://git.gay/nguyencaoantuong/Moonlight/releases)
