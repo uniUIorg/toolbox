@@ -1,0 +1,72 @@
+name: Android Release Build and Upload
+
+# This workflow will only run when a new Git tag is pushed (e.g., git push --tags)
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+      - 'V*.*.*'
+
+# Environment variables for easy reference
+env:
+  BUILD_TYPE: Release # Change to 'Debug' for debug builds
+  APK_PATH: app/build/outputs/apk/release/app-release-unsigned.apk # Adjust this path as needed
+
+jobs:
+  build_and_release:
+    runs-on: self-hosted # Use a self-hosted runner, or one provided by your Forgejo instance
+    
+    # Define environment secrets required for signing (if using Release)
+    # The FORGEJO_TOKEN is typically available automatically for API calls
+    # You will need to set up the KEYSTORE_B64 and KEYSTORE_PASS secrets in your repository settings
+    env:
+      KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
+
+    steps:
+    - name: Checkout repository
+      # Use a direct reference to the actions/checkout repository (replace with your Forgejo instance's mirror if needed)
+      uses: actions/checkout@v4 
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'gradle'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # --- ⚠️ SECURE SIGNING PROCESS (HIGHLY RECOMMENDED FOR RELEASE) ⚠️ ---
+    - name: Decode Keystore File
+      # This step decodes your keystore file from a Base64 secret and places it in the project directory.
+      run: |
+        echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > app/release.jks
+        
+    - name: Build and Sign Release APK with Gradle
+      # Assuming you have a standard 'release' signing block in your app/build.gradle
+      run: ./gradlew assemble${{ env.BUILD_TYPE }}
+      env:
+        # Pass Keystore variables for signing if not already defined in build.gradle
+        KEYSTORE_PATH: app/release.jks 
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }} 
+        KEY_PASS: ${{ secrets.KEY_PASS }}
+
+    - name: Get Release Tag Name
+      id: get_tag
+      # Extracts the tag name from the ref (e.g., 'refs/tags/v1.0.0' becomes 'v1.0.0')
+      run: echo "tag_name=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+
+    # --- 📦 UPLOAD TO FORGEJO RELEASE ---
+    - name: Create or Update Forgejo Release
+      # NOTE: You MUST replace this with the actual Action available on your Forgejo instance.
+      # Common Forgejo/Gitea release actions are often found under 'actions/gitea-release-action' or similar.
+      uses: actions/gitea-release-action@v1 # Replace with the correct URL/reference for your instance
+      with:
+        url: ${{ github.server_url }} # Your Forgejo instance URL (e.g., 'https://codeberg.org')
+        token: ${{ secrets.FORGEJO_TOKEN }} # The token is usually automatically provided or needs to be a secret
+        tag: ${{ steps.get_tag.outputs.tag_name }}
+        title: "App Release ${{ steps.get_tag.outputs.tag_name }}"
+        files: ${{ env.APK_PATH }}
+        # Add a body or body_path if you have release notes
+        # body: "New Android APK build uploaded."
