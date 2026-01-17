@@ -1,4 +1,4 @@
-package git.nguyencaoantuong.Moonlight
+package org.universalUI.universalX
 
 import android.content.Context
 import android.content.Context.TELEPHONY_SERVICE
@@ -58,8 +58,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import git.nguyencaoantuong.Moonlight.ui.theme.EclipseLabsTheme
-import git.nguyencaoantuong.Moonlight.ui.theme.Theme
+import org.universalUI.universalX.ui.theme.EclipseLabsTheme
+import org.universalUI.universalX.ui.theme.Theme
 import java.io.File
 import java.util.Locale
 
@@ -122,9 +122,7 @@ fun KernelStatus() {
     val kernelVersion = System.getProperty("os.version") ?: "universe"
 
     val (text, color, textColor) = when {
-        kernelVersion.contains("moonlight", ignoreCase = true) -> Triple("Moonlight", Color.DarkGray, Color.White)
-        kernelVersion.contains("helium", ignoreCase = true) -> Triple("h*", Color(0xFF42A5F5), Color.White)
-        kernelVersion.contains("experience", ignoreCase = true) -> Triple("exp", Color(0xFFFFCA28), Color.Black)
+        kernelVersion.contains("universalUI+perf", ignoreCase = true) -> Triple("h*", Color(0xFF42A5F5), Color.White)
         else -> Triple("universe", Color.DarkGray, Color.White)
     }
 
@@ -185,7 +183,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 DeviceInfoRow(stringResource(id = R.string.build_number), Build.DISPLAY)
                 DeviceInfoRow(stringResource(id = R.string.security_patch), Build.VERSION.SECURITY_PATCH)
                 DeviceInfoRow(stringResource(id = R.string.kernel_version), System.getProperty("os.version"))
-                DeviceInfoRow(stringResource(id = R.string.esim_provider), simProvider)
                 DeviceInfoRow(stringResource(id = R.string.fingerprint), Build.FINGERPRINT)
             }
         }
