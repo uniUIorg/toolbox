@@ -5,17 +5,17 @@ plugins {
 }
 
 android {
-    namespace = "git.nguyencaoantuong.Moonlight"
+    namespace = "org.universalUI.universalX"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "git.nguyencaoantuong.Moonlight"
+        applicationId = "org.universalUI.universalX"
         minSdk = 26
         targetSdk = 36
-        versionCode = 4
-        versionName = "Release I (1)"
+        versionCode = 1
+        versionName = "release"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
