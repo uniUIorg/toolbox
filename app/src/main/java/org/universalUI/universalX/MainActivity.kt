@@ -161,11 +161,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "Moonlight",
+            text = "universalX",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Left
         )
         KernelStatus()
         Card(modifier = Modifier.fillMaxWidth(), elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)) {
